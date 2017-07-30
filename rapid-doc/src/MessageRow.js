@@ -4,8 +4,9 @@ const styles = {
 	container: {
 		height: 24,
 		paddingLeft: 30,
-		paddingBottom: 20,
+		paddingBottom: 10,
 		display: 'flex',
+		paddingTop: 10,
 	},
 	text: {
 		fontSize: 15,

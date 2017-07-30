@@ -20,9 +20,16 @@ const styles = {
 }
 
 export default class InputField extends Component {
+	state = {value: ''};
+
+	handleChange = (e) => {
+		this.setState({value: e.target.value});
+	}
+
 	_handleKeyPress = (e) => {
 		const { onSubmit } = this.props
 		if (e.key === 'Enter') {
+			this.setState({value: ''});
 			onSubmit(e.target.value);
 			console.log("do validate");
 		}
@@ -31,7 +38,7 @@ export default class InputField extends Component {
 	render() {
 		return (
 			<div style={styles.container}>
-				<input type={'text'} style={styles.input} placeholder={'Type a message...'} onKeyPress={this._handleKeyPress}/>
+				<input value={this.state.value} onChange={this.handleChange}  type={'text'} style={styles.input} placeholder={'Type a message...'} onKeyPress={this._handleKeyPress}/>
 			</div>
 		);
 	}

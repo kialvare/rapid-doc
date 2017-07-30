@@ -112,6 +112,7 @@ export default class rightBar extends Component {
 					{
 						messages.map(this.renderMessage)
 					}
+					<div ref={'jump'}></div>
 				</div>
 				<div style={styles.inputContainer}>
 					<InputField onSubmit={this.handleCreateMessages} />
