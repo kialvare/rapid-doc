@@ -6,7 +6,8 @@ const styles = {
 		paddingLeft: 30,
 		paddingBottom: 10,
 		display: 'flex',
-		paddingTop: 10,
+		paddingTop: 12,
+		marginTop: 10,
 	},
 	text: {
 		fontSize: 15,
