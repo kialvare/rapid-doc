@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { userByName } from './User';
 import Avatar from './Avatar';
 import Link from './Link';
 import Marked from './markdown/Marked';
@@ -44,6 +45,8 @@ const styles = {
     fontSize: 16,
     fontWeight: 300,
     color: '#979797',
+    display: 'flex',
+    alignItems: 'center',
   },
   suggestionsText: {
     fontSize: 16,
@@ -136,15 +139,32 @@ export default class ContentTitle extends Component {
   }
 
   renderSuggestion = (suggestion) => {
-    const { onChange } = this.props
+    const { onChange, showEditingTools } = this.props
+
     const { id, body: { content, authorId } } = suggestion
 
     return (
       <div>
-        <div style={{ backgroundColor: 'rgb(245,245,245)', padding: 20, marginTop: 10, marginBottom: 30 }}>
-          <div style={styles.activeUserLabel}>
-            Suggestion by {authorId}
+        <div style={{
+          borderRadius: 4,
+          backgroundColor: 'rgb(245,245,245)',
+          padding: 20,
+          marginTop: 10,
+          marginBottom: 30,
+          ...(showEditingTools ? { border: '1px solid #cacaca', padding: 19 } : {})
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Avatar image={userByName[authorId] && userByName[authorId].image} />
+            <Spacer horizontal size={6} />
+            <div style={styles.activeUserLabel}>
+              Suggestion by {authorId}
+            </div>
           </div>
+          <div style={{
+            margin: '20px 0',
+            height: 1,
+            backgroundColor: '#cacaca',
+          }} />
           <Marked>
             {content}
           </Marked>
@@ -177,7 +197,7 @@ export default class ContentTitle extends Component {
   }
 
   renderSuggestions = () => {
-    const { suggestions } = this.props
+    const { suggestions, activeUser } = this.props
     const { showSuggestions } = this.state
 
     if (suggestions.length === 0) return null;
@@ -191,7 +211,8 @@ export default class ContentTitle extends Component {
 
     return (
       <div style={styles.suggestionsText}>
-        {suggestions.length} suggestions ({link})
+        {activeUser && <Spacer size={20} />}
+        {suggestions.length} suggestion{suggestions.length !== 1 ? 's' : ''} ({link})
         <Spacer size={20} />
         {showSuggestions && (
           <div>
