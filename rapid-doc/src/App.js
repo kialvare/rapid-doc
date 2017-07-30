@@ -39,6 +39,7 @@ class App extends Component {
 
 		this.state = {
 			pages: [],
+			suggestionsById: {},
 			currentPageId: 'initializing-client',
 		}
 
@@ -48,10 +49,29 @@ class App extends Component {
 				// Theres only one pages object
 				this.setState({ pages: pages[0].body.pages })
 			})
+
+		this.suggestions = client
+			.collection('suggestions')
+			.subscribe(suggestions => {
+				const suggestionsById = suggestions.reduce((acc, suggestion) => {
+					const { body: { blockId } } = suggestion;
+
+					if (!acc[blockId]) {
+						acc[blockId] = []
+					}
+
+					acc[blockId].push(suggestion)
+
+					return acc;
+				}, {})
+
+				this.setState({ suggestionsById })
+			})
 	}
 
 	componentWillUnmount() {
 		this.pageSubscription.unsubscribe()
+		this.suggestions.unsubscribe()
 	}
 
 	handleChangePage = (id) => {
@@ -59,7 +79,7 @@ class App extends Component {
 	}
 
 	render() {
-		const { pages, currentPageId } = this.state;
+		const { pages, currentPageId, suggestionsById } = this.state;
 
 		const currentPage = pages.find(page => page.id === currentPageId);
 
@@ -77,6 +97,7 @@ class App extends Component {
 						key={currentPageId}
 						title={currentPage ? currentPage.title : "Initializing Client"}
 						id={currentPageId}
+						suggestionsById={suggestionsById}
 					/>
 				</div>
 				<div style={styles.chat}>

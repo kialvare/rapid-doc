@@ -38,6 +38,7 @@ class Page extends Component {
       blocks: [],
       activeBlockId: null,
       isEditing: false,
+      suggestionsById: {},
     }
 
     this.subscription = client
@@ -117,6 +118,21 @@ class Page extends Component {
       });
   }
 
+  handleSubmitSuggestion = (id, content) => {
+    this.setState({
+      activeBlockId: null,
+    })
+
+    client
+      .collection('suggestions')
+      .newDocument()
+      .mutate({
+        authorId: currentUser.username,
+        content,
+        blockId: id,
+      });
+  }
+
   handlePageStartEditing = () => {
     this.setState({ isEditing: true })
   }
@@ -126,6 +142,7 @@ class Page extends Component {
   }
 
   renderBlock = (block) => {
+    const { suggestionsById } = this.props;
     const { activeBlockId, isEditing } = this.state;
     const { id, body: { content, activeUserId } } = block;
 
@@ -146,6 +163,8 @@ class Page extends Component {
         onClickEdit={() => this.handleBlockStartEditing(id)}
         onClickDone={() => this.handleBlockCommitEditing(id)}
         onClickDelete={() => this.handleBlockDelete(id)}
+        onClickSubmitSuggestion={(content) => this.handleSubmitSuggestion(id, content)}
+        suggestions={suggestionsById[id] || []}
       />
     )
   }
