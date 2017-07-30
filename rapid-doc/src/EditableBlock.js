@@ -17,33 +17,55 @@ export default class ContentTitle extends Component {
     onChange: () => { },
   }
 
+  state = {
+    pendingContent: this.props.content,
+  }
+
   handleChange = (event) => {
     const { onChange } = this.props
 
-    onChange(event.target.value)
+    this.setState({
+      pendingContent: event.target.value,
+    })
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.content !== this.props.content) {
+      this.setState({
+        pendingContent: nextProps.content,
+      })
+    }
+  }
+
+  handleDone = () => {
+    const { pendingContent } = this.state
+    const { onChange, onClickDone } = this.props
+
+    onClickDone()
+    onChange(pendingContent)
   }
 
   renderEditable() {
-    const { content, onClickDone } = this.props
+    const { pendingContent } = this.state
 
     return (
       <div>
         <div>
           <textarea
-            value={content}
+            value={pendingContent}
             onChange={this.handleChange}
           />
         </div>
         <Link
           text={'Done'}
-          onClick={onClickDone}
+          onClick={this.handleDone}
         />
       </div>
     )
   }
 
   renderReadOnly() {
-    const { content, onClickEdit, onChange } = this.props
+    const { content, onClickEdit } = this.props
 
     return (
       <div>
@@ -59,7 +81,7 @@ export default class ContentTitle extends Component {
   }
 
   render() {
-    const { content, isEditing } = this.props
+    const { isEditing } = this.props
 
     return (
       <div style={styles.container}>

@@ -2,13 +2,14 @@ import './App.css';
 
 import React, { Component } from 'react';
 
+import Navigation from './Navigation'
 import ContentSubtitle from './ContentSubtitle'
 import ContentTitle from './ContentTitle'
+import Contributers from './AvatarRow.js'
 import EditableBlock from './EditableBlock';
-import Link from './Link';
 import ListHeader from './ListHeader'
 import ListItem from './ListItem'
-import Marked from './markdown/Marked';
+import MessageRow from './MessageRow.js'
 import NavigationTitle from './NavigationTitle'
 import UserRow from './UserRow.js'
 import Contributers from './AvatarRow.js'
@@ -16,13 +17,13 @@ import MessageRow from './MessageRow.js'
 import InputField from './InputField.js'
 import client from './rapid/client'
 import dev from './images/dev-gh.png'
-import kim from './images/kim-gh.png'
 import dude1 from './images/dude1.png'
 import dude2 from './images/dude2.png'
 import dude3 from './images/dude3.png'
 import dude4 from './images/dude4.png'
 import dude5 from './images/dude5.png'
 import dude6 from './images/dude6.png'
+import kim from './images/kim-gh.png'
 
 const styles = {
 	container: {
@@ -88,11 +89,10 @@ class App extends Component {
 				.mutate({
 					content: 'Edit me!',
 				})
+			console.log('Created block', success)
 		} catch (e) {
 			console.log('Error creating block', e)
 		}
-
-		console.log('Created block')
 	}
 
 	handleBlockStartEditing = (id) => {
@@ -122,21 +122,7 @@ class App extends Component {
 		return (
 			<div style={styles.container}>
 				<div style={styles.navigation}>
-					<NavigationTitle text={'React Express'} />
-					<ListHeader text={'SETUP'} />
-					<ListItem text={'Environment'} />
-					<ListItem text={'Getting Started'} selected />
-					<ListItem text={'Build Tools'} />
-					<ListHeader text={'LANGUAGE'} />
-					<ListItem text={'Modern JavaScript'} />
-					<ListItem text={'ES2015'} />
-					<ListItem text={'ES2016'} />
-					<ListItem text={'JSX'} />
-					<ListHeader text={'REACT'} />
-					<ListItem text={'Top-Level API'} />
-					<ListItem text={'React Components'} />
-					<ListItem text={'Component API'} />
-					<ListItem text={'LifeCycle API'} />
+					<Navigation />
 				</div>
 				<div style={styles.content}>
 					<div style={styles.headerRow}>
