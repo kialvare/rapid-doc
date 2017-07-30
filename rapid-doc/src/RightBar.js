@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
+import { currentUser, userByName } from './User';
 import InputField from './InputField.js';
 import ListHeader from './ListHeader.js';
 import MessageRow from './MessageRow.js';
-import { currentUser, userByName } from './User';
 import UserRow from './UserRow.js';
 import client from './rapid/client'
 import dev from './images/dev-gh.png'
@@ -29,13 +30,13 @@ const styles = {
 		flex: 1,
 	},
 	userContainer: {
-		height: 380,
-		boxShadow: '0px 5px 5px -3px #888888',
+		boxShadow: '0px 3px 2px -3px rgba(0,0,0,0.22)',
 	},
 	messageContainer: {
 		flex: 1,
 		borderTop: '1px solid #EAEAEA',
 		overflowY: 'auto',
+		padding: '20px 0',
 	},
 }
 
@@ -60,6 +61,16 @@ export default class rightBar extends Component {
 
 	componentWillUnmount() {
 		this.subscription.unsubscribe()
+	}
+
+	scrollToBottom() {
+		const node = ReactDOM.findDOMNode(this.refs.jump)
+
+		node.scrollIntoViewIfNeeded()
+	}
+
+	componentDidUpdate() {
+		this.scrollToBottom()
 	}
 
 	async handleCreateMessages(messageText) {
@@ -106,7 +117,9 @@ export default class rightBar extends Component {
 					<UserRow image={dude2} text={'bobross'} />
 					<UserRow image={dude3} text={'thatoneguy'} />
 					<UserRow image={dude4} text={'supermario'} />
-					<ListHeader text={'MESSAGES'} />
+					<div style={{ padding: '10px 0' }}>
+						<ListHeader text={'MESSAGES'} />
+					</div>
 				</div>
 				<div style={styles.messageContainer}>
 					{

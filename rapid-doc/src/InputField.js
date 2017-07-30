@@ -10,26 +10,28 @@ const styles = {
 		display: 'flex',
 		flex: 1,
 		outline: 0,
-		borderLeft: '1px solid #EAEAEA',
-		borderTop: '1px solid #EAEAEA',
+		borderTop: '1px solid #EBEBEB',
 		borderRight: 0,
-		borderBottom: 0,
-		fontFamily: 'Raleway',
+		borderLeft: 0,
+		paddingLeft: 30,
 		height: 50,
-	},
+		alignItems: 'center',
+		fontSize: 16,
+		fontWeight: 300,
+	}
 }
 
 export default class InputField extends Component {
-	state = {value: ''};
+	state = { value: '' };
 
 	handleChange = (e) => {
-		this.setState({value: e.target.value});
+		this.setState({ value: e.target.value });
 	}
 
 	_handleKeyPress = (e) => {
 		const { onSubmit } = this.props
 		if (e.key === 'Enter') {
-			this.setState({value: ''});
+			this.setState({ value: '' });
 			onSubmit(e.target.value);
 			console.log("do validate");
 		}
@@ -38,7 +40,7 @@ export default class InputField extends Component {
 	render() {
 		return (
 			<div style={styles.container}>
-				<input value={this.state.value} onChange={this.handleChange}  type={'text'} style={styles.input} placeholder={'Type a message...'} onKeyPress={this._handleKeyPress}/>
+				<input value={this.state.value} onChange={this.handleChange} type={'text'} style={styles.input} placeholder={'Type a message...'} onKeyPress={this._handleKeyPress} />
 			</div>
 		);
 	}
