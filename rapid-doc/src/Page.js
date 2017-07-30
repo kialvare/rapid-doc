@@ -6,9 +6,8 @@ import EditableBlock from './EditableBlock';
 import Link from './Link';
 import Spacer from './Spacer';
 import client from './rapid/client'
-import dude1 from './images/dude1.png'
-import dude5 from './images/dude5.png'
-import dude6 from './images/dude6.png'
+import dev from './images/dev-gh.png'
+import kim from './images/kim-gh.png'
 
 const styles = {
   container: {
@@ -82,6 +81,15 @@ class Page extends Component {
       .merge({ content });
   }
 
+  handleBlockDelete = (id) => {
+    console.log('handle block delete', id)
+
+    client
+      .collection('blocks')
+      .document(id)
+      .delete()
+  }
+
   handleBlockStartEditing = (id) => {
     this.setState({
       activeBlockId: id,
@@ -115,6 +123,7 @@ class Page extends Component {
         onChange={(newContent) => this.handleBlockChange(id, newContent)}
         onClickEdit={() => this.handleBlockStartEditing(id)}
         onClickDone={() => this.handleBlockCommitEditing(id)}
+        onClickDelete={() => this.handleBlockDelete(id)}
       />
     )
   }
@@ -143,7 +152,7 @@ class Page extends Component {
             <Spacer size={4} />
             {this.renderEditLink()}
           </div>
-          <Contributers users={[dude1, dude5, dude6]} />
+          <Contributers users={[dev, kim]} />
         </div>
         {blocks.map(this.renderBlock).reduce((acc, block, i, list) => {
           acc.push(block)

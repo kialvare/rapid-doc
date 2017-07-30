@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 
 const styles = {
 	container: {
-		height: 24,
+		height: 36,
 		paddingLeft: 30,
-		paddingBottom: 10,
 		display: 'flex',
+		alignItems: 'center',
 	},
 	text: {
 		fontSize: 16,
+		fontWeight: 300,
 		color: '#979797',
 		paddingLeft: 10,
 	},

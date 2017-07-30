@@ -7,6 +7,7 @@ const styles = {
 		alignItems: 'center',
 	},
 	text: {
+		fontWeight: 100,
 		fontSize: 32,
 		color: '#848484',
 	},

@@ -122,7 +122,7 @@ export default class ContentTitle extends Component {
   }
 
   renderReadOnly() {
-    const { content, showEditingTools } = this.props
+    const { content, showEditingTools, onClickDelete } = this.props
 
     return (
       <div>
@@ -143,6 +143,7 @@ export default class ContentTitle extends Component {
               <Link
                 text={'Delete'}
                 type={'error'}
+                onClick={onClickDelete}
               />
             </div>
           </div>

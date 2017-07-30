@@ -13,7 +13,8 @@
 
 const Header = (props) => {
   const { children, level } = props;
-  return React.createElement(`h${level}`, { children });
+  const style = { fontWeight: 400 }
+  return React.createElement(`h${level}`, { children, style });
 }
 
 // var Header = require('Header');

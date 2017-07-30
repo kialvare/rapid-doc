@@ -5,7 +5,7 @@ const styles = {
 		padding: '25px 30px',
 	},
 	text: {
-		fontWeight: 100,
+		fontWeight: 300,
 		fontSize: 24,
 		color: 'rgba(0,0,0,0.69)',
 	},
