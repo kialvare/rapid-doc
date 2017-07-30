@@ -23,7 +23,7 @@ export default class Contributers extends Component {
 
 		const avatars = users.map(
 			(user) => (
-				<div style={styles.avatar}>
+				<div style={styles.avatar} key={user}>
 					<Avatar image={user} />
 				</div>
 			)

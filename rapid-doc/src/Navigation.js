@@ -3,11 +3,6 @@ import React, { Component } from 'react';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import NavigationTitle from './NavigationTitle';
-import client from './rapid/client';
-
-const styles = {
-
-}
 
 export default class Navigation extends Component {
   static defaultProps = {
