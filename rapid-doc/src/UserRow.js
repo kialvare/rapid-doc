@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 const styles = {
 	container: {
 		height: 24,
-		paddingLeft: 20,
+		paddingLeft: 30,
 		paddingBottom: 10,
 		display: 'flex',
 	},
@@ -26,7 +26,7 @@ export default class UserRow extends Component {
 		return (
 			<div style={styles.container}>
 				<div style={styles.image}>
-					<img src={image} alt=""/>
+					<img src={image} alt="" />
 				</div>
 				<div style={styles.text}>
 					{text}
