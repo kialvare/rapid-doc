@@ -36,6 +36,7 @@ const styles = {
 	content: {
 		paddingTop: 80,
 		paddingLeft: 100,
+		paddingRight: 100,
 		flex: 1,
 	},
 	chat: {
@@ -45,6 +46,11 @@ const styles = {
 	contributers: {
 		display: 'flex',
 		alignItems: 'left',
+	},
+	headerRow: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center',
 	},
 }
 
@@ -132,10 +138,10 @@ class App extends Component {
 					<ListItem text={'LifeCycle API'} />
 				</div>
 				<div style={styles.content}>
-					<ContentTitle text={'Getting Started'} />
-					<ContentSubtitle text={'How to Set Up'} />
-					<Contributers style={styles.contributers} users={[dude1, dude5, dude6]} />
-
+					<div style={styles.headerRow}>
+						<ContentTitle text={'Getting Started'} />
+						<Contributers style={styles.contributers} users={[dude1, dude5, dude6]} />
+					</div>
 					{
 						blocks.map(block => {
 							const { id, body: { content } } = block;

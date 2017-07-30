@@ -3,9 +3,10 @@ import Avatar from './Avatar'
 
 const styles = {
 	container: {
-		height: 24,
-		width: 174,
-		paddingLeft: 65,
+		display: 'flex',
+	},
+	row: {
+		marginLeft: 6,
 	},
 }
 
@@ -14,11 +15,11 @@ export default class Contributers extends Component {
 		const { users } = this.props
 
 		const avatars = users.map(
-			(user) => <div style={styles.container}><Avatar image={user}/></div>
+			(user) => <div style={styles.row}><Avatar image={user}/></div>
 		);
 		
 		return(
-			<div>{avatars}</div>
+			<div style={styles.container}>{avatars}</div>
 		);
 	}
 }
