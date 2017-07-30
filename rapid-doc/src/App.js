@@ -13,6 +13,7 @@ import NavigationTitle from './NavigationTitle'
 import UserRow from './UserRow.js'
 import Contributers from './AvatarRow.js'
 import MessageRow from './MessageRow.js'
+import InputField from './InputField.js'
 import client from './rapid/client'
 import dev from './images/dev-gh.png'
 import kim from './images/kim-gh.png'
@@ -171,6 +172,7 @@ class App extends Component {
 					<ListHeader text={'DROPDOWN MENU'} />
 					<MessageRow image={dev} user={'dabbott'} text={'hi'} />
 					<MessageRow image={kim} user={'kialvare'} text={'how you doin'} />
+					<InputField />
 				</div>
 			</div>
 		);
