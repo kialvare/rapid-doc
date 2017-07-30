@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Avatar from './Avatar';
+
 const styles = {
 	container: {
 		height: 36,
@@ -26,9 +28,7 @@ export default class UserRow extends Component {
 
 		return (
 			<div style={styles.container}>
-				<div style={styles.image}>
-					<img src={image} alt="" />
-				</div>
+				<Avatar image={image} />
 				<div style={styles.text}>
 					{text}
 				</div>

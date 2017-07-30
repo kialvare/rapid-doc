@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { currentUser, userByName } from './User';
 import ContentTitle from './ContentTitle'
 import Contributers from './AvatarRow.js'
 import EditableBlock from './EditableBlock';
@@ -94,12 +95,26 @@ class Page extends Component {
     this.setState({
       activeBlockId: id,
     })
+
+    client
+      .collection('blocks')
+      .document(id)
+      .merge({
+        activeUserId: currentUser.username,
+      });
   }
 
   handleBlockCommitEditing = (id) => {
     this.setState({
       activeBlockId: null,
     })
+
+    client
+      .collection('blocks')
+      .document(id)
+      .merge({
+        activeUserId: null,
+      });
   }
 
   handlePageStartEditing = () => {
@@ -112,11 +127,18 @@ class Page extends Component {
 
   renderBlock = (block) => {
     const { activeBlockId, isEditing } = this.state;
-    const { id, body: { content } } = block;
+    const { id, body: { content, activeUserId } } = block;
+
+    const activeUser = (
+      activeUserId !== currentUser.username &&
+      activeUserId &&
+      userByName[activeUserId]
+    )
 
     return (
       <EditableBlock
         key={id}
+        activeUser={activeUser}
         showEditingTools={isEditing}
         isEditing={id === activeBlockId}
         content={content}

@@ -15,6 +15,10 @@ const styles = {
 	avatar: {
 		marginLeft: 6,
 	},
+	label: {
+		fontWeight: 300,
+		color: '#848484',
+	}
 }
 
 export default class Contributers extends Component {
@@ -34,7 +38,7 @@ export default class Contributers extends Component {
 				<div style={styles.avatarRow}>
 					{avatars}
 				</div>
-				<div>
+				<div style={styles.label}>
 					{users.length} Contributors
 				</div>
 			</div>

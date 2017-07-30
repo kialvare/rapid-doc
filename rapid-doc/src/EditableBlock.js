@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Avatar from './Avatar';
 import Link from './Link';
 import Marked from './markdown/Marked';
 import Spacer from './Spacer';
@@ -32,6 +33,15 @@ const styles = {
   editingTools: {
     display: 'flex',
   },
+  activeUserRow: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  activeUserLabel: {
+    fontSize: 16,
+    fontWeight: 300,
+    color: '#979797',
+  }
 }
 
 export default class ContentTitle extends Component {
@@ -122,13 +132,27 @@ export default class ContentTitle extends Component {
   }
 
   renderReadOnly() {
-    const { content, showEditingTools, onClickDelete } = this.props
+    const { content, showEditingTools, onClickDelete, activeUser } = this.props
+
+    console.log('ACTIVE USER', activeUser)
 
     return (
       <div>
         <Marked>
           {content}
         </Marked>
+        {activeUser && (
+          <div>
+            <Spacer size={20} />
+            <div style={styles.activeUserRow}>
+              <Avatar image={activeUser.image} />
+              <Spacer size={6} horizontal />
+              <div style={styles.activeUserLabel}>
+                {activeUser.username} currently editing...
+              </div>
+            </div>
+          </div>
+        )}
         {showEditingTools && (
           <div>
             <Spacer size={20} />

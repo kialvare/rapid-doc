@@ -12,7 +12,7 @@ export const users = [
   },
 ]
 
-export const currentUser = users[0];
+export const currentUser = users[1];
 
 export const userByName = users.reduce((acc, user) => {
   acc[user.username] = user;
