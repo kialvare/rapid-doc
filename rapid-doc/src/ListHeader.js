@@ -4,6 +4,8 @@ const styles = {
 	container: {
 		height: 30,
 		paddingLeft: 30,
+		paddingTop: 15,
+		paddingBottom: 10,
 		display: 'flex',
 		alignItems: 'center',
 	},

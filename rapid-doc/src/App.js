@@ -7,8 +7,17 @@ import NavigationTitle from './NavigationTitle'
 import ContentTitle from './ContentTitle'
 import ContentSubtitle from './ContentSubtitle'
 import UserRow from './UserRow.js'
+import Contributers from './AvatarRow.js'
+import MessageRow from './MessageRow.js'
 
 import dev from './images/dev-gh.png'
+import kim from './images/kim-gh.png'
+import dude1 from './images/dude1.png'
+import dude2 from './images/dude2.png'
+import dude3 from './images/dude3.png'
+import dude4 from './images/dude4.png'
+import dude5 from './images/dude5.png'
+import dude6 from './images/dude6.png'
 
 const styles = {
 	container: {
@@ -20,20 +29,18 @@ const styles = {
 		width: 284,
 		borderRight: '1px solid #EAEAEA',
 	},
-	main: {
-		width: 810,
-	},
-	maincontent: {
-		marginTop: 80,
-		marginLeft: 100,
-		width: 609,
-	},
 	content: {
+		paddingTop: 80,
+		paddingLeft: 100,
 		flex: 1,
 	},
 	chat: {
 		width: 340,
 		borderLeft: '1px solid #EAEAEA',
+	},
+	contributers: {
+		display: 'flex',
+		alignItems: 'left',
 	},
 }
 
@@ -58,16 +65,23 @@ class App extends Component {
 				<ListItem text={'Component API'} />
 				<ListItem text={'LifeCycle API'} />
 			</div>
-			<div style={styles.main}>
-				<div style={styles.maincontent}>
-					<ContentTitle text={'Getting Started'} />
-					<br />
-					<ContentSubtitle text={'How to Set Up'} />
-				</div>
+			<div style={styles.content}>
+				<ContentTitle text={'Getting Started'} />
+				<ContentSubtitle text={'How to Set Up'} />
+				<Contributers style={styles.contributers} users={[dude1, dude5, dude6]} />
 			</div>
 			<div style={styles.chat}>
 				<ListHeader text={'MAINTAINERS'} />
 				<UserRow image={dev} text={'dabbott'} />
+				<UserRow image={kim} text={'kialvare'} />
+				<ListHeader text={'CONTRIBUTORS'} />
+				<UserRow image={dude1} text={'chucknorris'} />
+				<UserRow image={dude2} text={'bobross'} />
+				<UserRow image={dude3} text={'thatoneguy'} />
+				<UserRow image={dude4} text={'supermario'} />
+				<ListHeader text={'DROPDOWN MENU'} />
+				<MessageRow image={dev} user={'dabbott'} text={'hi'} />
+				<MessageRow image={kim} user={'kialvare'} text={'how you doin'} />
 			</div>
 		</div>
     );

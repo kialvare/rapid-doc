@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 const styles = {
 	container: {
-		height: 25,
+		height: 24,
 		paddingLeft: 20,
+		paddingBottom: 10,
 		display: 'flex',
 	},
 	text: {
@@ -12,6 +13,8 @@ const styles = {
 		paddingLeft: 10,
 	},
 	image: {
+		height: 24,
+		width: 24,
 		borderRadius: 100,
 	},
 }
