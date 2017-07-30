@@ -26,16 +26,16 @@ export default class Navigation extends Component {
       })
   }
 
-  renderItem = (page) => {
+  renderItem = (page, index) => {
     const { id, title, isGroup } = page
 
     if (isGroup) {
       return (
-        <ListHeader text={title} />
+        <ListHeader text={title.toUpperCase()} />
       )
     } else {
       return (
-        <ListItem text={title} />
+        <ListItem text={title} selected={index === 1} />
       )
     }
   }

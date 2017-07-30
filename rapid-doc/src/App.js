@@ -2,27 +2,15 @@ import './App.css';
 
 import React, { Component } from 'react';
 
-import Navigation from './Navigation'
-import ContentSubtitle from './ContentSubtitle'
 import ContentTitle from './ContentTitle'
-import EditableBlock from './EditableBlock';
-import ListHeader from './ListHeader'
-import ListItem from './ListItem'
-import NavigationTitle from './NavigationTitle'
-import UserRow from './UserRow.js'
 import Contributers from './AvatarRow.js'
-import MessageRow from './MessageRow.js'
-import InputField from './InputField.js'
+import EditableBlock from './EditableBlock';
+import Navigation from './Navigation'
 import RightBar from './RightBar.js'
 import client from './rapid/client'
-import dev from './images/dev-gh.png'
 import dude1 from './images/dude1.png'
-import dude2 from './images/dude2.png'
-import dude3 from './images/dude3.png'
-import dude4 from './images/dude4.png'
 import dude5 from './images/dude5.png'
 import dude6 from './images/dude6.png'
-import kim from './images/kim-gh.png'
 
 const styles = {
 	container: {
