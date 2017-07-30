@@ -6,6 +6,7 @@ const styles = {
 		paddingLeft: 65,
 		display: 'flex',
 		alignItems: 'center',
+		cursor: 'pointer',
 	},
 	text: {
 		fontSize: 16,
@@ -26,13 +27,16 @@ styles.textSelected = {
 
 export default class ListItem extends Component {
 	render() {
-		const { text, selected } = this.props
+		const { text, selected, onClick } = this.props
 
 		return (
-			<div style={selected ? styles.containerSelected : styles.container}>
-			<div style={selected ? styles.textSelected : styles.text}>
-			{text}
-			</div>
+			<div
+				style={selected ? styles.containerSelected : styles.container}
+				onClick={onClick}
+			>
+				<div style={selected ? styles.textSelected : styles.text}>
+					{text}
+				</div>
 			</div>
 		);
 	}

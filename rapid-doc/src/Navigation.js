@@ -10,38 +10,38 @@ const styles = {
 }
 
 export default class Navigation extends Component {
-
-  constructor() {
-    super()
-
-    this.state = {
-      pages: [],
-    }
-
-    this.subscription = client
-      .collection('pages')
-      .subscribe(pages => {
-        // Theres only one pages object
-        this.setState({ pages: pages[0].body.pages })
-      })
+  static defaultProps = {
+    onChangePage: () => { },
   }
 
-  renderItem = (page, index) => {
-    const { id, title, isGroup } = page
+  handleLinkClick = (id) => {
+    const { onChangePage } = this.props;
+
+    onChangePage(id)
+  }
+
+  renderItem = (page) => {
+    const { currentPageId } = this.props;
+    const { id, title, isGroup } = page;
 
     if (isGroup) {
       return (
-        <ListHeader text={title.toUpperCase()} />
+        <ListHeader key={id} text={title.toUpperCase()} />
       )
     } else {
       return (
-        <ListItem text={title} selected={index === 1} />
+        <ListItem
+          key={id}
+          onClick={() => this.handleLinkClick(id)}
+          text={title}
+          selected={id === currentPageId}
+        />
       )
     }
   }
 
   render() {
-    const { pages } = this.state;
+    const { pages } = this.props;
 
     return (
       <div>
