@@ -22,3 +22,16 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.prism {
+  white-space: pre;
+  font-family: Monaco, monospace;
+  font-size: 13px;
+  line-height: 20px;
+  background-color: #f0f8ff;
+  padding: 20px;
+}
+
+.page p {
+  line-height: 22px;
+}

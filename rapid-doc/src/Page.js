@@ -21,6 +21,9 @@ const styles = {
   },
   title: {
     marginBottom: 4,
+  },
+  addSectionContainer: {
+    padding: 20,
   }
 }
 
@@ -133,7 +136,7 @@ class Page extends Component {
     const { blocks, isEditing } = this.state;
 
     return (
-      <div style={styles.container}>
+      <div className={'page'} style={styles.container}>
         <div style={styles.headerRow}>
           <div>
             <ContentTitle text={title} />
@@ -145,17 +148,19 @@ class Page extends Component {
         {blocks.map(this.renderBlock).reduce((acc, block, i, list) => {
           acc.push(block)
 
-          if (i !== list.length < 1) {
+          if (isEditing && i !== list.length < 1) {
             acc.push(<Spacer key={'spacer' + i} size={20} />)
           }
 
           return acc;
         }, [])}
         {isEditing && (
-          <Link
-            text={'Add section'}
-            onClick={this.handleCreateBlock}
-          />
+          <div style={styles.addSectionContainer}>
+            <Link
+              text={'Add section'}
+              onClick={this.handleCreateBlock}
+            />
+          </div>
         )}
       </div>
     );

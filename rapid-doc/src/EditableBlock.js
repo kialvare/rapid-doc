@@ -43,7 +43,7 @@ export default class ContentTitle extends Component {
   }
 
   state = {
-    pendingContent: this.props.content,
+    pendingContent: null,
   }
 
   handleChange = (event) => {
@@ -52,19 +52,40 @@ export default class ContentTitle extends Component {
     this.setState({
       pendingContent: event.target.value,
     })
+
+    onChange(event.target.value);
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.content !== this.props.content) {
+    const { pendingContent } = this.state
+
+    if (
+      nextProps.content !== this.props.content &&
+      pendingContent === null
+    ) {
       this.setState({
         pendingContent: nextProps.content,
       })
     }
   }
 
+  handleClickEdit = () => {
+    const { content, onClickEdit } = this.props
+
+    this.setState({
+      pendingContent: content,
+    })
+
+    onClickEdit();
+  }
+
   handleDone = () => {
     const { pendingContent } = this.state
     const { onChange, onClickDone } = this.props
+
+    this.setState({
+      pendingContent: null,
+    })
 
     onClickDone()
     onChange(pendingContent)
@@ -101,7 +122,7 @@ export default class ContentTitle extends Component {
   }
 
   renderReadOnly() {
-    const { content, onClickEdit, showEditingTools } = this.props
+    const { content, showEditingTools } = this.props
 
     return (
       <div>
@@ -116,7 +137,7 @@ export default class ContentTitle extends Component {
             <div style={styles.editingTools}>
               <Link
                 text={'Edit'}
-                onClick={onClickEdit}
+                onClick={this.handleClickEdit}
               />
               <Spacer flex />
               <Link
