@@ -6,8 +6,7 @@ const styles = {
 		paddingLeft: 30,
 		paddingBottom: 10,
 		display: 'flex',
-		paddingTop: 12,
-		marginTop: 10,
+		marginTop: 20,
 	},
 	text: {
 		fontSize: 15,
@@ -15,6 +14,7 @@ const styles = {
 		paddingLeft: 10,
 	},
 	image: {
+		paddingTop: 4,
 		height: 24,
 		width: 24,
 		borderRadius: 100,
