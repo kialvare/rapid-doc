@@ -3,25 +3,23 @@ import React, { Component } from 'react';
 const styles = {
 	container: {
 		height: 30,
-		paddingLeft: 30,
 		display: 'flex',
 		alignItems: 'center',
 	},
 	text: {
-		fontWeight: 300,
-		fontSize: 12,
-		color: '#979797',
+		fontSize: 32,
+		color: '#848484',
 	},
 }
 
-export default class ListHeader extends Component {
+export default class ContentTitle extends Component {
 	render() {
 		const { text } = this.props
 		return (
 			<div style={styles.container}>
-			<div style={styles.text}>
-				{text}
-			</div>
+				<div style={styles.text}>
+					{text}
+				</div>
 			</div>
 		);
 	}
