@@ -20,8 +20,8 @@ const styles = {
 	content: {
 		paddingTop: 80,
 		paddingBottom: 80,
-		paddingLeft: 100,
-		paddingRight: 100,
+		paddingLeft: 80,
+		paddingRight: 80,
 		overflowY: 'auto',
 		flex: 1,
 	},
@@ -61,6 +61,8 @@ class App extends Component {
 	render() {
 		const { pages, currentPageId } = this.state;
 
+		const currentPage = pages.find(page => page.id === currentPageId);
+
 		return (
 			<div style={styles.container}>
 				<div style={styles.navigation}>
@@ -73,6 +75,7 @@ class App extends Component {
 				<div style={styles.content}>
 					<Page
 						key={currentPageId}
+						title={currentPage ? currentPage.title : "Initializing Client"}
 						id={currentPageId}
 					/>
 				</div>

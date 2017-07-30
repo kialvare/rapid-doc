@@ -2,10 +2,21 @@ import React, { Component } from 'react';
 
 import Link from './Link';
 import Marked from './markdown/Marked';
+import Spacer from './Spacer';
 
 const styles = {
   container: {
-    backgroundColor: '#F8F8F8',
+    borderRadius: 4,
+    padding: 20,
+  },
+  containerEditable: {
+    backgroundColor: '#F0F8FF',
+    border: '1px solid #46A6FF',
+    padding: 19,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#46A6FF',
   },
 }
 
@@ -65,26 +76,38 @@ export default class ContentTitle extends Component {
   }
 
   renderReadOnly() {
-    const { content, onClickEdit } = this.props
+    const { content, onClickEdit, showEditingTools } = this.props
 
     return (
       <div>
         <Marked>
           {content}
         </Marked>
-        <Link
-          text={'Edit'}
-          onClick={onClickEdit}
-        />
+        {showEditingTools && (
+          <div>
+            <Spacer size={20} />
+            <div style={styles.divider} />
+            <Spacer size={20} />
+            <Link
+              text={'Edit'}
+              onClick={onClickEdit}
+            />
+          </div>
+        )}
       </div>
     )
   }
 
   render() {
-    const { isEditing } = this.props
+    const { isEditing, showEditingTools } = this.props
+
+    const style = {
+      ...styles.container,
+      ...(showEditingTools ? styles.containerEditable : {}),
+    }
 
     return (
-      <div style={styles.container}>
+      <div style={style}>
         {isEditing ? this.renderEditable() : this.renderReadOnly()}
       </div>
     );

@@ -4,6 +4,7 @@ import ContentTitle from './ContentTitle'
 import Contributers from './AvatarRow.js'
 import EditableBlock from './EditableBlock';
 import Link from './Link';
+import Spacer from './Spacer';
 import client from './rapid/client'
 import dude1 from './images/dude1.png'
 import dude5 from './images/dude5.png'
@@ -16,8 +17,11 @@ const styles = {
   headerRow: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    padding: 20,
   },
+  title: {
+    marginBottom: 4,
+  }
 }
 
 class Page extends Component {
@@ -30,6 +34,7 @@ class Page extends Component {
     this.state = {
       blocks: [],
       activeBlockId: null,
+      isEditing: false,
     }
 
     this.subscription = client
@@ -80,39 +85,78 @@ class Page extends Component {
     })
   }
 
-  handleBlockEndEditing = (id) => {
+  handleBlockCommitEditing = (id) => {
     this.setState({
       activeBlockId: null,
     })
   }
 
+  handlePageStartEditing = () => {
+    this.setState({ isEditing: true })
+  }
+
+  handlePageCommitEditing = () => {
+    this.setState({ isEditing: false })
+  }
+
   renderBlock = (block) => {
-    const { activeBlockId } = this.state;
+    const { activeBlockId, isEditing } = this.state;
     const { id, body: { content } } = block;
 
     return (
       <EditableBlock
         key={id}
+        showEditingTools={isEditing}
         isEditing={id === activeBlockId}
         content={content}
         onChange={(newContent) => this.handleBlockChange(id, newContent)}
         onClickEdit={() => this.handleBlockStartEditing(id)}
-        onClickDone={() => this.handleBlockEndEditing(id)}
+        onClickDone={() => this.handleBlockCommitEditing(id)}
       />
     )
   }
 
+  renderEditLink() {
+    const { isEditing } = this.state;
+
+    if (isEditing) {
+      return (
+        <Link text={'Done'} onClick={this.handlePageCommitEditing} />
+      )
+    }
+
+    return <Link text={'Edit'} onClick={this.handlePageStartEditing} />
+  }
+
   render() {
-    const { blocks } = this.state;
+    const { title } = this.props;
+    const { blocks, isEditing } = this.state;
 
     return (
       <div style={styles.container}>
         <div style={styles.headerRow}>
-          <ContentTitle text={'Getting Started'} />
+          <div>
+            <ContentTitle text={title} />
+            <Spacer size={4} />
+            {this.renderEditLink()}
+          </div>
           <Contributers users={[dude1, dude5, dude6]} />
         </div>
-        {blocks.map(this.renderBlock)}
-        <Link text={'Add section'} onClick={this.handleCreateBlock} />
+        {blocks.map(this.renderBlock).reduce((acc, block, i, list) => {
+          acc.push(block)
+
+          if (i !== list.length < 1) {
+            acc.push(<Spacer key={'spacer' + i} size={20} />)
+          }
+
+          return acc;
+        }, [])}
+        {isEditing && (
+          <Link
+            text={'Add section'}
+            onClick={this.handleCreateBlock}
+          />
+        )}
       </div>
     );
   }
