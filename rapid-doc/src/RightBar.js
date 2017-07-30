@@ -3,14 +3,15 @@ import React, { Component } from 'react';
 import InputField from './InputField.js';
 import ListHeader from './ListHeader.js';
 import MessageRow from './MessageRow.js';
+import { currentUser, userByName } from './User';
 import UserRow from './UserRow.js';
+import client from './rapid/client'
 import dev from './images/dev-gh.png'
 import dude1 from './images/dude1.png'
 import dude2 from './images/dude2.png'
 import dude3 from './images/dude3.png'
 import dude4 from './images/dude4.png'
 import kim from './images/kim-gh.png'
-import client from './rapid/client'
 
 const styles = {
 	container: {
@@ -33,7 +34,7 @@ const styles = {
 	},
 	messageContainer: {
 		flex: 1,
-		borderTop: '1px solid #EAEAEA', 
+		borderTop: '1px solid #EAEAEA',
 		overflowY: 'auto',
 	},
 }
@@ -68,11 +69,12 @@ export default class rightBar extends Component {
 
 		try {
 			const success = await client
-			.collection('messages')
-			.newDocument()
-			.mutate({
-				messageText,
-			})
+				.collection('messages')
+				.newDocument()
+				.mutate({
+					messageText,
+					username: currentUser.username,
+				})
 			console.log('Created message', success)
 		} catch (e) {
 			console.log('handled message not-change', id, messageText)
@@ -80,10 +82,14 @@ export default class rightBar extends Component {
 	}
 
 	renderMessage = (message) => {
-		const { id, body: { messageText } } = message;
+		const { id, body: { messageText, username = 'kialvare' } } = message;
 
-		return(
-			<MessageRow image={kim} user={'kialvare'} text={messageText} />
+		return (
+			<MessageRow
+				image={(userByName[username] || {}).image}
+				user={username}
+				text={messageText}
+			/>
 		);
 	}
 
@@ -108,7 +114,7 @@ export default class rightBar extends Component {
 					}
 				</div>
 				<div style={styles.inputContainer}>
-					<InputField onSubmit={this.handleCreateMessages}/>
+					<InputField onSubmit={this.handleCreateMessages} />
 				</div>
 			</div>
 		);
