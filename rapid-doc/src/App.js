@@ -5,16 +5,15 @@ import React, { Component } from 'react';
 import Navigation from './Navigation'
 import ContentSubtitle from './ContentSubtitle'
 import ContentTitle from './ContentTitle'
-import Contributers from './AvatarRow.js'
 import EditableBlock from './EditableBlock';
 import ListHeader from './ListHeader'
 import ListItem from './ListItem'
-import MessageRow from './MessageRow.js'
 import NavigationTitle from './NavigationTitle'
 import UserRow from './UserRow.js'
 import Contributers from './AvatarRow.js'
 import MessageRow from './MessageRow.js'
 import InputField from './InputField.js'
+import RightBar from './RightBar.js'
 import client from './rapid/client'
 import dev from './images/dev-gh.png'
 import dude1 from './images/dude1.png'
@@ -147,18 +146,7 @@ class App extends Component {
 					}
 				</div>
 				<div style={styles.chat}>
-					<ListHeader text={'MAINTAINERS'} />
-					<UserRow image={dev} text={'dabbott'} />
-					<UserRow image={kim} text={'kialvare'} />
-					<ListHeader text={'CONTRIBUTORS'} />
-					<UserRow image={dude1} text={'chucknorris'} />
-					<UserRow image={dude2} text={'bobross'} />
-					<UserRow image={dude3} text={'thatoneguy'} />
-					<UserRow image={dude4} text={'supermario'} />
-					<ListHeader text={'DROPDOWN MENU'} />
-					<MessageRow image={dev} user={'dabbott'} text={'hi'} />
-					<MessageRow image={kim} user={'kialvare'} text={'how you doin'} />
-					<InputField />
+					<RightBar />
 				</div>
 			</div>
 		);
