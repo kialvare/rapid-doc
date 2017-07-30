@@ -7,14 +7,23 @@ const styles = {
     display: 'inline-block',
     cursor: 'pointer',
   },
+  error: {
+    color: '#FF001F',
+  },
 }
 
 export default class Link extends Component {
   render() {
-    const { text, onClick } = this.props
+    const { text, onClick, type } = this.props
+
+    const style = {
+      ...styles.link,
+      ...(type === 'error' ? styles.error : {}),
+    }
+
     return (
       <div
-        style={styles.link}
+        style={style}
         onClick={onClick}
       >
         {text}

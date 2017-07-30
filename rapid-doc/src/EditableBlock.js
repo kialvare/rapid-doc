@@ -18,6 +18,20 @@ const styles = {
     height: 1,
     backgroundColor: '#46A6FF',
   },
+  textareaContainer: {
+    display: 'flex',
+    minHeight: 250,
+  },
+  textarea: {
+    flex: 1,
+    padding: 10,
+    border: '4px solid #46A6FF',
+    fontFamily: 'Monaco, monospace',
+    fontSize: 14,
+  },
+  editingTools: {
+    display: 'flex',
+  },
 }
 
 export default class ContentTitle extends Component {
@@ -61,16 +75,27 @@ export default class ContentTitle extends Component {
 
     return (
       <div>
-        <div>
+        <div style={styles.textareaContainer}>
           <textarea
+            style={styles.textarea}
             value={pendingContent}
             onChange={this.handleChange}
           />
         </div>
-        <Link
-          text={'Done'}
-          onClick={this.handleDone}
-        />
+        <div>
+          <Spacer size={20} />
+          <div style={styles.editingTools}>
+            <Link
+              text={'Done'}
+              onClick={this.handleDone}
+            />
+            <Spacer flex />
+            <Link
+              text={'Revert Changes'}
+              type={'error'}
+            />
+          </div>
+        </div>
       </div>
     )
   }
@@ -88,10 +113,17 @@ export default class ContentTitle extends Component {
             <Spacer size={20} />
             <div style={styles.divider} />
             <Spacer size={20} />
-            <Link
-              text={'Edit'}
-              onClick={onClickEdit}
-            />
+            <div style={styles.editingTools}>
+              <Link
+                text={'Edit'}
+                onClick={onClickEdit}
+              />
+              <Spacer flex />
+              <Link
+                text={'Delete'}
+                type={'error'}
+              />
+            </div>
           </div>
         )}
       </div>
