@@ -26,6 +26,7 @@ const styles = {
 		flex: 1,
 	},
 	chat: {
+		display: 'flex',
 		width: 340,
 		borderLeft: '1px solid #EAEAEA',
 	},
