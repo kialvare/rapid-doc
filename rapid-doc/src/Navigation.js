@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import NavigationTitle from './NavigationTitle';
+import SearchField from './SearchField';
 
 export default class Navigation extends Component {
   static defaultProps = {
@@ -41,6 +42,7 @@ export default class Navigation extends Component {
     return (
       <div>
         <NavigationTitle text={'rapid.io'} />
+        <SearchField />
         {pages.map(this.renderItem)}
       </div>
     );

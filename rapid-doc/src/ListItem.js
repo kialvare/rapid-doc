@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 
 const styles = {
 	container: {
-		height: 30,
-		paddingLeft: 65,
+		height: 36,
+		paddingLeft: 50,
 		display: 'flex',
 		alignItems: 'center',
 		cursor: 'pointer',
 	},
 	text: {
 		fontSize: 16,
+		fontWeight: 300,
 		color: '#979797',
 	},
 }
@@ -21,7 +22,7 @@ styles.containerSelected = {
 
 styles.textSelected = {
 	...styles.text,
-	fontWeight: 500,
+	fontWeight: 400,
 	color: 'white',
 }
 

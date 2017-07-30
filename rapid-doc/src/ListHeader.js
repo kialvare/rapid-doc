@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 
 const styles = {
 	container: {
-		height: 30,
+		height: 36,
 		paddingLeft: 30,
-		paddingTop: 15,
-		paddingBottom: 10,
 		display: 'flex',
 		alignItems: 'center',
+		marginTop: 20,
 	},
 	text: {
 		fontWeight: 300,
 		fontSize: 12,
-		color: '#979797',
+		color: 'rgba(150,150,150,0.69)',
 	},
 }
 
@@ -21,9 +20,9 @@ export default class ListHeader extends Component {
 		const { text } = this.props
 		return (
 			<div style={styles.container}>
-			<div style={styles.text}>
-				{text}
-			</div>
+				<div style={styles.text}>
+					{text}
+				</div>
 			</div>
 		);
 	}

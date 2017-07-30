@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 
 const styles = {
 	container: {
-		height: 45,
-		paddingLeft: 25,
-		paddingTop: 25,
-		display: 'flex',
+		padding: '25px 30px',
 	},
 	text: {
-		fontSize: 25,
-		color: 'black',
+		fontWeight: 100,
+		fontSize: 24,
+		color: 'rgba(0,0,0,0.69)',
 	},
 }
 
@@ -18,9 +16,9 @@ export default class NavigationTitle extends Component {
 		const { text } = this.props
 		return (
 			<div style={styles.container}>
-			<div style={styles.text}>
-				{text}
-			</div>
+				<div style={styles.text}>
+					{text}
+				</div>
 			</div>
 		);
 	}
