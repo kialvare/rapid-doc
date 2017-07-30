@@ -10,6 +10,7 @@ import dude2 from './images/dude2.png'
 import dude3 from './images/dude3.png'
 import dude4 from './images/dude4.png'
 import kim from './images/kim-gh.png'
+import client from './rapid/client'
 
 const styles = {
 	container: {
@@ -26,13 +27,71 @@ const styles = {
 	top: {
 		flex: 1,
 	},
+	userContainer: {
+		height: 380,
+		boxShadow: '0px 5px 5px -3px #888888',
+	},
+	messageContainer: {
+		flex: 1,
+		borderTop: '1px solid #EAEAEA', 
+		overflowY: 'auto',
+	},
 }
 
 export default class rightBar extends Component {
+	constructor(props) {
+		super()
+
+		const { id } = props
+
+		this.state = {
+			messages: [],
+		}
+
+		this.subscription = client
+			.collection('messages')
+			.subscribe(messages => {
+				this.setState({ messages })
+			})
+
+		this.handleCreateMessages = this.handleCreateMessages.bind(this);
+	}
+
+	componentWillUnmount() {
+		this.subscription.unsubscribe()
+	}
+
+	async handleCreateMessages(messageText) {
+		const { id } = this.props;
+
+		console.log('Getting message...')
+
+		try {
+			const success = await client
+			.collection('messages')
+			.newDocument()
+			.mutate({
+				messageText,
+			})
+			console.log('Created message', success)
+		} catch (e) {
+			console.log('handled message not-change', id, messageText)
+		}
+	}
+
+	renderMessage = (message) => {
+		const { id, body: { messageText } } = message;
+
+		return(
+			<MessageRow image={kim} user={'kialvare'} text={messageText} />
+		);
+	}
+
 	render() {
+		const { messages } = this.state
 		return (
 			<div style={styles.container}>
-				<div style={styles.top}>
+				<div style={styles.userContainer}>
 					<ListHeader text={'MAINTAINERS'} />
 					<UserRow image={dev} text={'dabbott'} />
 					<UserRow image={kim} text={'kialvare'} />
@@ -41,12 +100,15 @@ export default class rightBar extends Component {
 					<UserRow image={dude2} text={'bobross'} />
 					<UserRow image={dude3} text={'thatoneguy'} />
 					<UserRow image={dude4} text={'supermario'} />
-					<ListHeader text={'DROPDOWN MENU'} />
-					<MessageRow image={dev} user={'dabbott'} text={'hi'} />
-					<MessageRow image={kim} user={'kialvare'} text={'how you doin'} />
+					<ListHeader text={'MESSAGES'} />
+				</div>
+				<div style={styles.messageContainer}>
+					{
+						messages.map(this.renderMessage)
+					}
 				</div>
 				<div style={styles.inputContainer}>
-					<InputField />
+					<InputField onSubmit={this.handleCreateMessages}/>
 				</div>
 			</div>
 		);
